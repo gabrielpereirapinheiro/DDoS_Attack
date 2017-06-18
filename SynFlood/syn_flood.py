@@ -157,10 +157,10 @@ print "\n"
 
 inicio = 0
 fim =0
-while 1:
-    inicio = time.time()
-    clientSocket.sendto(packet, (destine_IP , 0 ))
-    fim = fim + time.time() - inicio
-    print "Tempo de execucao = " + str(fim)
+
+inicio = time.time()
+clientSocket.sendto(packet, (destine_IP , 0 ))
+fim = fim + time.time() - inicio
+print "Tempo de execucao = " + str(fim)
 
 
