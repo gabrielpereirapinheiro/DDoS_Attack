@@ -150,15 +150,17 @@ i = 0
 
 dest_ip = '192.168.0.15'
 
-
+ataque2 = Thread(target=attack,args=[1,dest_ip])
+ataque3 = Thread(target=attack,args=[2,dest_ip])
+ataque4 = Thread(target=attack,args=[3,dest_ip])
 while 1:
 	msg = s.recvfrom(12000)
 	if msg:
 		show_begin(dest_ip)
-
-		ataque2 = Thread(target=attack,args=[6001])
-		ataque3 = Thread(target=attack,args=[7002])
-		ataque4 = Thread(target=attack,args=[8003])
+		ataque2.start()
+ 		ataque3.start ()
+          	ataque4.start ()
 		
+
 
 
