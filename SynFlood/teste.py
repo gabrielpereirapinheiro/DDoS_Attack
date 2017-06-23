@@ -9,7 +9,7 @@ def is_valid_ipv4(ip):
                 and all(0 <= int(part) <= 255 for part in parts)
            )
 
-class GuessingGame:
+class Master:
     def __init__(self, master):
         self.master = master
         master.title("HTTP FLOOD")
