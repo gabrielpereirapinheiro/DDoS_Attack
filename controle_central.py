@@ -13,7 +13,7 @@ def mandando():
 
 	print 'ok'
 	while True:
-		mySocket.sendto('skajfdhjfisdh',(SERVER_IP,PORT_NUMBER))
+		mySocket.sendto('inicie_ataque',(SERVER_IP,PORT_NUMBER))
 
 
 mandando1 =Thread(target=mandando)
