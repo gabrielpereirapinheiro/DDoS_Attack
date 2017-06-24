@@ -5,15 +5,29 @@ from threading import Thread
 #Funcao que manda o comando
 def mandando():
 
-	#Define o IP que vai enviar o ataque
-	SERVER_IP   = '192.168.43.165'
+	i = 0
 
-	PORT_NUMBER = 13005
-	SIZE = 1024
-	print ("Enviando para o IP {0} na porta {1}\n".format(SERVER_IP, PORT_NUMBER))
-	mySocket = socket( AF_INET, SOCK_DGRAM )
+	while(i<255):
 
-	mySocket.sendto('pare_ataque',(SERVER_IP,PORT_NUMBER))
+		#Define o IP que vai enviar o ataque
+		SERVER_IP   = '192.168.43.'+str(i)
+
+		i=i+1
+
+		#Porta do Ataque
+		PORT_NUMBER = 13005
+
+		#Buffer
+		SIZE = 1024
+
+		#Mostra na tela
+		print ("Enviando para o IP {0} na porta {1}\n".format(SERVER_IP, PORT_NUMBER))
+
+		#Socket criado
+		mySocket = socket( AF_INET, SOCK_DGRAM )
+
+		#Enviando a mensagem comece
+		mySocket.sendto('inicie_ataque',(SERVER_IP,PORT_NUMBER))
 
 
 
