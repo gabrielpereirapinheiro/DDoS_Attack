@@ -109,9 +109,9 @@ def funcao_attack():
 
 
 def escutando():
-	PORT_NUMBER = 5009
+	PORT_NUMBER = 13006
 	SIZE = 1024
-	hostName = socket.gethostbyname( '0.0.0.0' )
+	hostName = '0.0.0.0' 
 	mySocket = socket.socket( socket.AF_INET, socket.SOCK_DGRAM )
 	mySocket.bind( (hostName, PORT_NUMBER) )
 
@@ -119,9 +119,13 @@ def escutando():
 	
 	while True:
 	    (data,addr) = mySocket.recvfrom(SIZE)
+	    print data
             if data == 'inicie_ataque':
             	print 'entrou'
             	funcao_attack()
+            if data == 'pare_ataque':
+            	print 'saiu'
+            	break
 
 
 
