@@ -4,29 +4,32 @@ ________________________________________________________________________________
 
 ### Developers:
 
-- GABRIEL PEREIRA PINHEIRO 
+- [Felipe Lira](https://github.com/liraf)
 
-- VICTOR ARAUJO VIEIRA 
+- [Gabriel Pereira Pinheiro](https://github.com/gabrielpereirapinheiro)
 
-- IURE VIEIRA BRANDÃO
+- [Iure Vieira Brandão](https://github.com/iurebrandao)
 
-- YURI CASTRO
+- [Victor Araujo Vieira](https://github.com/IceVct)
 
-- FELIPE LIRA
+- [Yuri Castro](https://github.com/Yuri-Castro)
 
 ### Email :
 
+- ⁠⁠⁠⁠⁠liraffs@gmail.com
+
 - gabriel.pereira.pinheiro@gmail.com
+
+- iurebrandao@gmail.com
 
 - icevct@gmail.com
 
 - yuricda96@gmail.com
 
-- ⁠⁠⁠⁠⁠liraffs@gmail.com
-
-- iurebrandao@gmail.com
 __________________________________________________________________________________________________________________________________________
 
-### About 
-install GUI ThTinker no ubuntu pelo comando: 
-install Requests : pip install requests
+### How to execute :
+
+- Install ```GUI ThTinker``` on Ubuntu with command :
+
+> $ pip install requests
