@@ -96,5 +96,5 @@ root = Tk()
 
 my_gui = Interface(root)
 root.configure(background='black')
-root.geometry("514x190")
+
 root.mainloop()
