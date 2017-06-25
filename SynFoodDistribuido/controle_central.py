@@ -9,18 +9,18 @@ def mandando():
 	print 'Enviando mensagem para todos na rede !'
 
 	#Variavel auxiliar para enviar a todos na rede
-	i = 0
+	i = 1
 
 	while(i<255):
 
 		#Define o IP que vai enviar o ataque
-		SERVER_IP   = '192.168.43.'+str(i)
+		SERVER_IP   = '192.168.1.'+str(i)
 
 		#Proximo endereco
 		i=i+1
 
 		#Porta do Ataque
-		PORT_NUMBER = 13005
+		PORT_NUMBER = 13007
 
 		#Buffer
 		SIZE = 1024
@@ -38,11 +38,11 @@ def mandando():
 
 	print '\nEnviando mensagens para parar o ataque'
 		
-	i = 0
+	i = 1
 	
 	while (i<255):
 		#Define o IP que vai enviar o ataque
-		SERVER_IP   = '192.168.43.'+str(i)
+		SERVER_IP   = '192.168.1.'+str(i)
 
 		#Proximo endereco
 		i=i+1
@@ -52,9 +52,5 @@ def mandando():
 	print '\nMensagens enviadas !'
 				
 
-#Thread que ira inicar o ataque
-mandando1 =Thread(target=mandando)
 
-#Comeca o ataque
-mandando1.start()
-
+mandando()

