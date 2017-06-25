@@ -1,5 +1,5 @@
-# University of Brasilia (UnB)
-##  Distributed Denial of Service (DDoS)
+
+#  Distributed Denial of Service (DDoS)
 ___________________________________________________________________________________________________________________________________________
 
 ### Developers:
@@ -28,8 +28,17 @@ ________________________________________________________________________________
 
 __________________________________________________________________________________________________________________________________________
 
-### How to execute :
+### Install libraries
 
 - Install ```GUI ThTinker``` on Ubuntu with command :
 
 > $ sudo pip install requests
+
+### How to execute :
+
+You need to execute ```servidor_mestre.py``` on a central computer and execute ```atacante.py``` in another computers ...
+
+
+### About :
+
+The attack [HTTP Flood](https://en.wikipedia.org/wiki/HTTP_Flood) is DDoS ...
