@@ -32,4 +32,4 @@ ________________________________________________________________________________
 
 - Install ```GUI ThTinker``` on Ubuntu with command :
 
-> $ pip install requests
+> $ sudo pip install requests
