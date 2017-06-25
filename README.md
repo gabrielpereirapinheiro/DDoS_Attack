@@ -14,18 +14,6 @@ ________________________________________________________________________________
 
 - [Yuri Castro](https://github.com/Yuri-Castro)
 
-### Email :
-
-- ⁠⁠⁠⁠⁠liraffs@gmail.com
-
-- gabriel.pereira.pinheiro@gmail.com
-
-- iurebrandao@gmail.com
-
-- icevct@gmail.com
-
-- yuricda96@gmail.com
-
 __________________________________________________________________________________________________________________________________________
 
 ### Install libraries
