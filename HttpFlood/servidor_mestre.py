@@ -84,7 +84,7 @@ class Interface:
         self.entry.delete(0, END)
 
         self.IP = None
-        serverSocket.sendto("B/ ", (clientAddress, serverPort))
+        serverSocket.sendto("B/", (clientAddress, serverPort))
 
         self.message = "TYPE IP TO BE ATTACKED :"
         self.label_text.set(self.message)
