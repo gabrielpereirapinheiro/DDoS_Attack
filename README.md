@@ -30,3 +30,4 @@ You need to execute ```servidor_mestre.py``` on a central computer and execute `
 ### About :
 
 The attack [HTTP Flood](https://en.wikipedia.org/wiki/HTTP_Flood) is DDoS ...
+This is a [video](https://www.youtube.com/watch?v=BzgsT-_GC4Q) of a good explication of attack 
