@@ -19,6 +19,8 @@ def Post(url,attackedServerPort):
         r = requests.get(url,data = parameters, headers=headers)
         print r.text
 
+    print 'Attack is over'
+
 #Funcao que ira criar as Threas 
 def attack(IP, attackedServerPort):
 
@@ -82,8 +84,7 @@ def listening():
             print 'Starting attack'
             Kill = False
             attackThread.start()
-        else:
-            print 'Attack is over'
+        elif command == 'B':
             Kill = True
         
 
