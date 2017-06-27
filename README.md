@@ -1,32 +1,32 @@
-# University of Brasilia (UnB)
-##  Distributed Denial of Service (DDoS)
+
+#  Distributed Denial of Service (DDoS)
 ___________________________________________________________________________________________________________________________________________
 
 ### Developers:
 
-- GABRIEL PEREIRA PINHEIRO 
+- [Felipe Lira](https://github.com/liraf)
 
-- VICTOR ARAUJO VIEIRA 
+- [Gabriel Pereira Pinheiro](https://github.com/gabrielpereirapinheiro)
 
-- IURE VIEIRA BRANDÃO
+- [Iure Vieira Brandão](https://github.com/iurebrandao)
 
-- YURI CASTRO
+- [Victor Araujo Vieira](https://github.com/IceVct)
 
-- FELIPE LIRA
+- [Yuri Castro](https://github.com/Yuri-Castro)
 
-### Email :
-
-- gabriel.pereira.pinheiro@gmail.com
-
-- icevct@gmail.com
-
-- yuricda96@gmail.com
-
-- ⁠⁠⁠⁠⁠liraffs@gmail.com
-
-- iurebrandao@gmail.com
 __________________________________________________________________________________________________________________________________________
 
-### About 
-install GUI ThTinker no ubuntu pelo comando: 
-install Requests : pip install requests
+### Install libraries
+
+- Install ```GUI ThTinker``` on Ubuntu with command :
+
+> $ sudo pip install requests
+
+### How to execute :
+
+You need to execute ```servidor_mestre.py``` on a central computer and execute ```atacante.py``` in another computers ...
+
+
+### About :
+
+The attack [HTTP Flood](https://en.wikipedia.org/wiki/HTTP_Flood) is DDoS ...
