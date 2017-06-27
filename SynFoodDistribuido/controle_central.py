@@ -20,7 +20,7 @@ def mandando():
 		i=i+1
 
 		#Porta do Ataque
-		PORT_NUMBER = 13000
+		PORT_NUMBER = 13007
 
 		#Buffer
 		SIZE = 1024
@@ -38,11 +38,11 @@ def mandando():
 
 	print '\nEnviando mensagens para parar o ataque'
 		
-	i = 1
+	i = 2
 	
 	while (i<255):
 		#Define o IP que vai enviar o ataque
-		SERVER_IP   = '192.168.1.'+str(i)
+		SERVER_IP   = '192.168.43.'+str(i)
 
 		#Proximo endereco
 		i=i+1
