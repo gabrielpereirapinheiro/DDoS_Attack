@@ -18,9 +18,17 @@ ________________________________________________________________________________
 
 ### Install libraries
 
-- Install ```GUI ThTinker``` on Ubuntu with command :
+- Install pip on Ubuntu with command:
 
-> $ sudo pip install requests
+> $ sudo apt-get install python-pip
+
+- Install the library for GUI Tkinter with command:
+
+> $ sudo apt-get install python-tk
+
+- Then install the rest of the libraries with command:
+
+> $ sudo pip install -r requirements.txt
 
 ### How to execute :
 
