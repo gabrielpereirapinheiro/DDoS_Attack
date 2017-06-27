@@ -40,7 +40,7 @@ def funcao_attack():
 	source_ip = '.'.join('%s'%random.randint(2, 254) for i in range(4)) 
 	print 'IP aleatorio gerado: ', source_ip
 	#dest_ip = '192.168.0.101' # victor
-	dest_ip = '192.168.1.29' # gabriel
+	dest_ip = '192.168.43.1' # gabriel
 	 
 	# ip header fields
 	ihl = 5

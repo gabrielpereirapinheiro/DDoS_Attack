@@ -6,21 +6,21 @@ from threading import Thread
 def mandando():
 
 	#Mostra na tela
-	print 'Enviando mensagem para todos na rede !'
+	print 'Enviando mensasa22sagem para todos na rede !'
 
 	#Variavel auxiliar para enviar a todos na rede
-	i = 1
+	i = 2
 
 	while(i<255):
 
 		#Define o IP que vai enviar o ataque
-		SERVER_IP   = '192.168.1.'+str(i)
+		SERVER_IP   = '192.168.43.'+str(i)
 
 		#Proximo endereco
 		i=i+1
 
 		#Porta do Ataque
-		PORT_NUMBER = 13007
+		PORT_NUMBER = 13000
 
 		#Buffer
 		SIZE = 1024
