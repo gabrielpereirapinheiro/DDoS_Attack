@@ -2,11 +2,11 @@ from flask import Flask
 import os
 
 cwd = os.getcwd()
-app = Flask(__name__, static_url_path = '/static', static_folder = cwd+'/shop/static')
+app = Flask(__name__, static_url_path = '/', static_folder = cwd+'/web/static')
 
 def get_str_from_resource(rsc):
     page = ''
-    with open('shop/'+rsc, 'r') as f:
+    with open('web/'+rsc, 'r') as f:
         page = f.read()
     return page
 
