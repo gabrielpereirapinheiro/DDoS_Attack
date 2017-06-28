@@ -1,15 +1,15 @@
-from flask import Flask, request
+from flask import Flask, request, send_from_directory
 import os
 import socket
 
-
+# 192.168.43.212
 def get_ip_address():
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     s.connect(("8.8.8.8", 80))
     return s.getsockname()[0]
 
 cwd = os.getcwd()
-app = Flask(__name__, static_url_path = '/', static_folder = cwd+'/web/static')
+app = Flask(__name__, static_url_path = '', static_folder = cwd+'/web/')
 
 def get_str_from_resource(rsc):
     page = ''
