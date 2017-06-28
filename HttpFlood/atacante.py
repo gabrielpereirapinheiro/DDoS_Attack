@@ -21,15 +21,15 @@ def Post(url,attackedServerPort):
     print 'parou'
 
     
-channel = []
+
 #Funcao que ira criar as Threas 
 def attack(IP, attackedServerPort):
-
+    channel = []
     #Definicao das n threads
-    for i in range(0, 700):
+    for i in range(0, 1):
         channel.append(Thread(target=Post, args=[IP, attackedServerPort]))
 
-    for i in range(0, 700):
+    for i in range(0, 1):
         #seta as threads como daemon = true para que elas possam ser destruidas
         channel[i].setDaemon(True)
         #Inicia as threads
@@ -71,8 +71,8 @@ def listening():
         sentence = ''
         if(command == 'S'):
             print 'Starting attack'
-            attack(IP, attackedServerPort) # funcao que cria as threads
             Kill = False
+            attack(IP, attackedServerPort) # funcao que cria as threads
         elif command == 'B':
             print 'Attack is over'
             Kill = True
