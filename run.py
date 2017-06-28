@@ -1,5 +1,12 @@
 from flask import Flask, request
 import os
+import socket
+
+
+def get_ip_address():
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    s.connect(("8.8.8.8", 80))
+    return s.getsockname()[0]
 
 cwd = os.getcwd()
 app = Flask(__name__, static_url_path = '/', static_folder = cwd+'/web/static')
@@ -24,4 +31,10 @@ def resources(path):
     return get_str_from_resource('index.html')
 
 if __name__ == "__main__":
-    app.run(debug=True, host="192.168.43.212",port=8000,threaded=True)
+
+    ip_address = get_ip_address()
+
+    if not ip_address:
+        ip_address = '127.0.0.0'
+
+    app.run(debug=True, host=ip_address,port=8000,threaded=True)
