@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request
 import os
 
 cwd = os.getcwd()
@@ -10,9 +10,12 @@ def get_str_from_resource(rsc):
         page = f.read()
     return page
 
-@app.route("/")
+@app.route("/", methods=['GET', 'POST'])
 def main():
-    return get_str_from_resource('index.html')
+    if request.method == 'POST':
+        return "Teste de post no servidor"
+    if request.method == 'GET':
+        return get_str_from_resource('index.html')
 
 @app.route("/<path>")
 def resources(path):
@@ -21,4 +24,4 @@ def resources(path):
     return get_str_from_resource('index.html')
 
 if __name__ == "__main__":
-    app.run(debug=True, host="192.168.43.208",port=8000,threaded=True)
+    app.run(debug=True, host="192.168.43.212",port=8000,threaded=True)

