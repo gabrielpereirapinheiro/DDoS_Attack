@@ -1,20 +1,10 @@
 
 #  Distributed Denial of Service (DDoS)
+
 ___________________________________________________________________________________________________________________________________________
 
-### Developers:
-
-- [Felipe Lira](https://github.com/liraf)
-
-- [Gabriel Pereira Pinheiro](https://github.com/gabrielpereirapinheiro)
-
-- [Iure Vieira Brandão](https://github.com/iurebrandao)
-
-- [Victor Araujo Vieira](https://github.com/IceVct)
-
-- [Yuri Castro](https://github.com/Yuri-Castro)
-
-__________________________________________________________________________________________________________________________________________
+#### You must use it for education gols only
+___________________________________________________________________________________________________________________________________________
 
 ### Install libraries
 
